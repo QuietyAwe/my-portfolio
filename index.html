@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人作品集 | Qee's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        dark: '#0a0a0a',
+                        card: '#171717',
+                        accent: '#d4af37',
+                        muted: '#a1a1aa',
+                    },
+                    animation: { 
+                        'float': 'float 6s ease-in-out infinite',
+                        'typing': 'typing 1.5s steps(30, end), blink-caret .5s step-end infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        typing: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' },
+                        },
+                        'blink-caret': {
+                            'from, to': { color: 'transparent' },
+                            '50%': { color: '#d4af37' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #050505; color: #ffffff; overflow-x: hidden; }
+        .spotlight {
+            background: radial-gradient(600px circle at var(--x) var(--y), rgba(212, 175, 55, 0.08), transparent 40%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        .text-gradient {
+            background: linear-gradient(to right, #fff, #d4af37);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* 确保图片缩略图整齐且圆角 */
+        .project-media img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; border-radius: 1rem; }
+        .project-media a { cursor: zoom-in; overflow: hidden; display: block; height: 100%; border-radius: 1rem; }
+        .project-media a:hover img { transform: scale(1.03); opacity: 0.9; }
+
+        /* AIGC 头像区域的命令行打字机效果 */
+        .console-text {
+            overflow: hidden;
+            border-right: .15em solid #d4af37;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 2.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <div class="spotlight" id="spotlight"></div>
+
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-black/50 backdrop-blur-xl">
+        <div class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#" class="font-serif italic text-2xl tracking-wider hover:text-gray-300 transition-colors">Portfolio.</a>
+            <div class="hidden md:flex space-x-8 text-sm tracking-widest uppercase text-gray-400">
+                <a href="#work" class="hover:text-white transition-colors">作品集</a>
+                <a href="#about" class="hover:text-white transition-colors">关于与技术栈</a>
+                <a href="#contact" class="hover:text-white transition-colors">联系我</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex flex-col justify-center items-center relative px-6 pt-20">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-[128px] animate-float"></div>
+        <div class="z-10 text-center max-w-4xl space-y-8 reveal active">
+            <p class="text-muted tracking-[0.2em] uppercase text-sm mb-4">AIGC Engineer & Game Developer</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl leading-tight">
+                <span class="block text-gradient">Empowering</span>
+                <span class="block italic text-gray-500">Games with</span>
+                <span class="block text-gradient">AI Tech.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed pt-6 font-light">
+                我是 <span class="text-white font-medium">奇</span>，专注于将 <span class="text-white font-medium">AIGC 工业化落地</span> 与 <span class="text-white font-medium">业务底层逻辑</span> 相结合。通过自动化工作流与 AI 赋能，构建高效率、沉浸感的数字体验。
+            </p>
+        </div>
+        <a href="#work" class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 text-muted opacity-60 hover:opacity-100 hover:text-accent transition-all animate-bounce cursor-pointer">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </a>
+    </section>
+
+    <section id="work" class="py-32 bg-dark">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 reveal">
+                <h2 class="font-serif text-5xl md:text-6xl text-white">Selected Work</h2>
+                <p class="text-muted mt-4 md:mt-0 max-w-sm text-right">点击素材可查看大图或视频演示。</p>
+            </div>
+
+            <div class="space-y-32">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal shadow-2xl shadow-black/40 p-4 md:p-6 rounded-3xl bg-card border border-white/5">
+                    <div class="lg:col-span-7 h-[400px] project-media">
+                        <a href="assets/舆情监控.png" data-fancybox="gallery-monitor">
+                            <img src="assets/舆情监控.png" alt="舆情监控">
+                        </a>
+                    </div>
+                    <div class="lg:col-span-5 space-y-5 px-2">
+                        <span class="text-accent text-sm tracking-widest uppercase">Agent / Automation</span>
+                        <h3 class="font-serif text-3xl md:text-4xl text-white">自动化舆情治理系统</h3>
+                        <p class="text-muted text-sm leading-relaxed">针对传统人工巡查效率低、及时性差的痛点，利用 PicoClaw 搭建 TapTap 论坛自动化巡查基建，通过爬虫实时抓取反馈，对接大模型生成初版回复，经人工审核后推送。针对 Bug 反馈，接入钉钉自动建立任务并生成舆情日报。负面舆情响应时间缩短至分钟级，解放人力，社区活跃度与玩家好感度稳步提升。</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal shadow-2xl shadow-black/40 p-4 md:p-6 rounded-3xl bg-card border border-white/5">
+                    <div class="lg:col-span-7 lg:order-last h-[400px] project-media relative group">
+                        <a href="assets/影刀RPA.mp4" data-fancybox="video-rpa" data-caption="影刀 RPA 多平台分发演示">
+                            <img src="assets/影刀RPA封面.PNG" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-all" alt="影刀封面"> 
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="lg:col-span-5 space-y-5 px-2">
+                        <span class="text-accent text-sm tracking-widest uppercase">RPA / Prompt Engineering</span>
+                        <h3 class="font-serif text-3xl md:text-4xl text-white">RPA自动化分发管线</h3>
+                        <p class="text-muted text-sm leading-relaxed">针对传统分发耗时久、创意产出慢的痛点，独立开发基于影刀 RPA 的多平台分发机器人，单人维护平台扩展至 6 个，每周节省机械工时 15+ 小时，运营重心成功转移至核心策略。</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal shadow-2xl shadow-black/40 p-4 md:p-6 rounded-3xl bg-card border border-white/5">
+                    <div class="lg:col-span-7 h-[400px] grid grid-cols-3 gap-3 project-media">
+                        <div class="col-span-2">
+                            <a href="assets/表情包3.PNG" data-fancybox="gallery-emoji">
+                                <img src="assets/表情包3.PNG" alt="表情包主图">
+                            </a>
+                        </div>
+                        <div class="grid grid-rows-2 gap-3">
+                            <a href="assets/表情包.PNG" data-fancybox="gallery-emoji">
+                                <img src="assets/表情包.PNG" alt="表情包2">
+                            </a>
+                            <a href="assets/表情包2.PNG" data-fancybox="gallery-emoji">
+                                <img src="assets/表情包2.PNG" alt="表情包3">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5 space-y-5 px-2">
+                        <span class="text-accent text-sm tracking-widest uppercase">Stable Diffusion / Pipeline</span>
+                        <h3 class="font-serif text-3xl md:text-4xl text-white">AIGC 辅助美术资产产出</h3>
+                        <p class="text-muted text-sm leading-relaxed">引入 Stable Diffusion + Photoshop 辅助流，负责海报、表情包及社区物料的监修与制作。单人产出表情包 10+ 套，物料生产周期缩短 40%，表情包累计使用次数达到10w+。</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal shadow-2xl shadow-black/40 p-4 md:p-6 rounded-3xl bg-card border border-white/5">
+                    <div class="lg:col-span-7 lg:order-last h-[400px] project-media relative group">
+                        <a href="assets/记忆回廊.mp4" data-fancybox="video-memory">
+                            <img src="assets/记忆回廊封面.PNG" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-all" alt="记忆回廊封面">
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center">
+                                    <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="lg:col-span-5 space-y-5 px-2">
+                        <span class="text-accent text-sm tracking-widest uppercase">AI Design / Persona</span>
+                        <h3 class="font-serif text-3xl md:text-4xl text-white">AI 交互功能落地</h3>
+                        <p class="text-muted text-sm leading-relaxed">负责角色 Persona 逻辑构建与 Prompt 调优。使用结构化提示词确保输出规范，增加屏蔽词防范幻觉及违规风险。上线 7 日内玩家日均停留时长提升 32%，成为社区讨论度最高的新增功能之一。</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal shadow-2xl shadow-black/40 p-4 md:p-6 rounded-3xl bg-card border border-white/5">
+                    <div class="lg:col-span-7 h-[400px] project-media">
+                        <a href="assets/知乎.png" data-fancybox="gallery-zhihu">
+                            <img src="assets/知乎.png" alt="知乎数据">
+                        </a>
+                    </div>
+                    <div class="lg:col-span-5 space-y-5 px-2">
+                        <span class="text-accent text-sm tracking-widest uppercase">LLM / Growth</span>
+                        <h3 class="font-serif text-3xl md:text-4xl text-white">高价值内容工程</h3>
+                        <p class="text-muted text-sm leading-relaxed">利用 AI 辅助深度润色，在知乎平台打造现象级高赞回答，累计浏览量 96w+，赞同 1.8w+，验证了 AI 在内容生产中的量化杠杆作用。</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal shadow-2xl shadow-black/40 p-4 md:p-6 rounded-3xl bg-card border border-white/5">
+                    <div class="lg:col-span-7 lg:order-last h-[400px] project-media">
+                        <a href="assets/秘境对决异画.PNG" data-fancybox="gallery-netease">
+                            <img src="assets/秘境对决异画.PNG" alt="网易秘境对决">
+                        </a>
+                    </div>
+                    <div class="lg:col-span-5 space-y-5 px-2">
+                        <span class="text-accent text-sm tracking-widest uppercase">AIGC / LoRA / ComfyUI</span>
+                        <h3 class="font-serif text-3xl md:text-4xl text-white">《秘境对决》异画生产</h3>
+                        <p class="text-muted text-sm leading-relaxed">本地部署 SD 视觉管线，自主训练 LoRA 模型，运用风格迁移独立完成 132 张高水准异画资产，验证 AIGC 在存量游戏内容更新中的商业价值。</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal shadow-2xl shadow-black/40 p-4 md:p-6 rounded-3xl bg-card border border-white/5">
+                    <div class="lg:col-span-7 h-[400px] project-media">
+                        <a href="assets/Unity.PNG" data-fancybox="gallery-unity">
+                            <img src="assets/Unity.PNG" alt="Unity 项目">
+                        </a>
+                    </div>
+                    <div class="lg:col-span-5 space-y-5 px-2">
+                        <span class="text-accent text-sm tracking-widest uppercase">Unity / C# / Game Dev</span>
+                        <h3 class="font-serif text-3xl md:text-4xl text-white">独立游戏开发实战</h3>
+                        <p class="text-muted text-sm leading-relaxed">使用 C# 实现卡牌刷新算法、状态机 (FSM) 战斗 AI 及模块化技能库，具备从底层代码视角审视游戏设计的能力。</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+<section id="about" class="py-32 bg-[#080808]">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="font-serif text-5xl md:text-6xl text-white mb-16 text-center reveal">Profile & Skills</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="md:col-span-2 bg-card p-10 rounded-2xl border border-white/5 hover:border-white/10 transition-colors reveal">
+                    <h3 class="text-2xl font-bold mb-6 text-white">关于我</h3>
+                    <p class="text-muted leading-relaxed mb-6 text-lg">
+                        我是一名拥有 <span class="text-white">AI应用与自动化开发</span> 与 <span class="text-white">游戏内容运营</span> 背景的跨界开发者。在数字化转型的浪潮中，我对 <span class="text-white">AIGC 工业化落地</span> 与 <span class="text-white">游戏业务逻辑</span> 充满热情。
+                    </p>
+                    <p class="text-muted leading-relaxed mb-8">
+                        这种独特的视⻆让我不局限于单一的技术实现，而是能同时兼顾“敏锐的内容审美”、“合规的数据安全”以及“前沿的 AI 杠杆”，创造出既懂用户又能高效落地的数字产品。
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-1.5 bg-white/10 rounded-full text-sm text-gray-200">复合型思维</span>
+                        <span class="px-4 py-1.5 bg-white/10 rounded-full text-sm text-gray-200">AIGC 流程优化</span>
+                        <span class="px-4 py-1.5 bg-white/10 rounded-full text-sm text-gray-200">独立开发</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-6 reveal">
+                    <div class="bg-card p-8 rounded-2xl border border-white/5 flex flex-col justify-center items-center text-center flex-1">
+                        <span class="text-5xl font-serif italic text-accent mb-2">100%</span>
+                        <span class="text-sm text-muted uppercase tracking-widest">Driven by Tech & Art</span>
+                    </div>
+                    
+                    <div class="bg-card rounded-2xl border-2 border-accent/20 p-6 flex flex-col shadow-inner h-48 overflow-hidden relative group">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="flex-grow font-mono text-sm text-gray-500 space-y-2 mt-2">
+                            <p class="text-accent console-text">> qee --status ONLINE</p>
+                            <p>> skills_init[AIGC,Dev]</p>
+                            <p>> executing: root.exe</p>
+                            <p class="text-white animate-pulse">_</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-3 bg-gradient-to-br from-gray-900 to-[#111] p-10 rounded-2xl border border-white/5 reveal mt-4">
+                    <h3 class="text-2xl font-bold mb-8 text-white">技术栈与工具箱</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div>
+                            <h4 class="text-accent mb-4 font-medium border-b border-white/10 pb-2">AIGC & 模型</h4>
+                            <ul class="space-y-2 text-sm text-gray-400">
+                                <li>• Stable Diffusion (ComfyUI/WebUI)</li>
+                                <li>• LoRA 训练与微调</li>
+                                <li>• ControlNet 精准控制</li>
+                                <li>• NanoBanana</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-accent mb-4 font-medium border-b border-white/10 pb-2">编程与工具</h4>
+                            <ul class="space-y-2 text-sm text-gray-400">
+							    <li>• Python (自动化与爬虫基础)</li>
+                                <li>• C# & Unity 引擎</li>
+                                <li>• Git  & Docker部署</li>
+                                <li>• ClaudeCode</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-accent mb-4 font-medium border-b border-white/10 pb-2">自动化与效率</h4>
+                            <ul class="space-y-2 text-sm text-gray-400">
+                                <li>• PicoClaw/OpenClaw (Agent)</li>
+                                <li>• 大语言模型 API 接入部署</li>
+								<li>• MCP & SKILL & 提示词工程</li>
+								<li>• 影刀 RPA (跨平台自动化)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-accent mb-4 font-medium border-b border-white/10 pb-2">设计与底层逻辑</h4>
+                            <ul class="space-y-2 text-sm text-gray-400">
+                                <li>• Photoshop / Premiere Pro</li>
+                                <li>• 业务数据分析与ROI视角</li>
+                                <li>• 网络安全协议与数据合规</li>
+                                <li>• 二次元内容深度审美</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="py-24 border-t border-white/5 bg-black text-center">
+        <div class="container mx-auto px-6 reveal">
+            <h2 class="font-serif text-4xl md:text-5xl text-white mb-8">jiang.qee@outlook.com</h2>
+            <div class="mt-20 text-xs text-gray-600 uppercase tracking-widest">
+                &copy; 2026 Designed & Developed by Qee.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+        // 初始化灯箱
+        Fancybox.bind("[data-fancybox]", {
+            compact: false,
+            idle: false,
+            Images: { zoom: true },
+        });
+
+        // 聚光灯效果
+        const spotlight = document.getElementById('spotlight');
+        window.addEventListener('mousemove', e => {
+            spotlight.style.setProperty('--x', `${e.clientX}px`);
+            spotlight.style.setProperty('--y', `${e.clientY}px`);
+        });
+
+        // 滚动揭示
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
